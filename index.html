@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<ht9m9l lang="id">
+<head>
+<meta charset="UTF-8">
+<title>NARENDRA MUKTI WIBOWO</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+}
+
+/* MATRIX BACKGROUND */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* HEADER */
+.header {
+    padding: 20px;
+    border-bottom: 1px solid #00ff00;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+/* CONTAINER */
+.container {
+    padding: 20px;
+}
+
+/* ARTICLE CARD */
+.card {
+    border: 1px solid #00ff00;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px #00ff00;
+    transform: scale(1.02);
+}
+
+/* TITLE */
+.title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: 1px solid #00ff00;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #00ff00;
+    color: black;
+}
+
+a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00ff00;
+    text-decoration: underline;
+}
+</style>
+
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="header">
+    <h1>> NARENDRA MUKTI WIBOWO </h1>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="title">KASUS 1</div>
+        <p>Belajar teknik dasar </p>
+        <a href="artikel1.html"><div class="btn">Baca</div></a>
+    </div>
+
+    <div class="card">
+        <div class="title">KASUS 2</div>
+        <p>Bagaimana cara </p>
+        <div class="btn">Baca</div>
+    </div>
+
+    <div class="card">
+        <div class="title">KASUS 3</div>
+        <p>Memahami bagaimana </p>
+        <div class="btn">Baca</div>
+    </div>
+
+</div>
+
+<script>
+// MATRIX EFFECT
+let canvas = document.getElementById("matrix");
+let ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+let letters = "01";
+letters = letters.split("");
+
+let fontSize = 14;
+let columns = canvas.width/fontSize;
+
+let drops = [];
+for(let x = 0; x < columns; x++)
+    drops[x] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0F0";
+    ctx.font = fontSize + "px monospace";
+
+    for(let i = 0; i < drops.length; i++) {
+        let text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+        if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 33);
+</script>
+
+</body>
+</html>
